@@ -1,0 +1,19 @@
+# *******  DEFAULT  *******
+spring:
+  application:
+    name: simpleDemo
+  jmx:
+    enabled: false
+
+spring:
+  profiles: dev
+
+info:
+  app:
+    name: ${spring.application.name}
+    version: ${VERSION:unknown}
+
+server:
+  port: ${port:8017}
+
+
