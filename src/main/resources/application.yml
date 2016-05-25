@@ -9,6 +9,3 @@ info:
   app:
     name: ${spring.application.name}
     version: ${VERSION:unknown}
-
-server:
-  port: ${port:8017}
