@@ -30,6 +30,7 @@ public class SwaggerConfiguration {
                 .contact("serdil.akyuz@arbetsformedlingen.se, christian.jacobson@arbetsformdelingen.se")
                 .title("OPEN DATA API")
                 .description("A open data service")
+                .version("1.0")
                 .build();
     }
 
