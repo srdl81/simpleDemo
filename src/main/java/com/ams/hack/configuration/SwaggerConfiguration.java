@@ -30,16 +30,15 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .contact("serdil.akyuz@arbetsformedlingen.se")
-                .title("OPEN DATA API")
-                .description("A open data service")
+                .title("PBV3API")
+                .description("platsbankenLabz")
                 .version("1.0")
                 .build();
     }
 
     private Predicate<String> paths() {
         return or(
-                regex("/duration.*"),
-                regex("/all.*"));
+                regex("/duration.*"));
     }
 
 }
