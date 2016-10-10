@@ -30,7 +30,7 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .contact("serdil.akyuz@arbetsformedlingen.se")
-                .title("PBV3API")
+                .title("Trip Duration API")
                 .description("platsbankenLabz")
                 .version("1.0")
                 .build();
