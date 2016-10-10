@@ -1,11 +1,9 @@
 package com.ams.hack.controller;
 
 
+import com.ams.hack.model.TravelInfo;
 import com.ams.hack.service.DurationService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +20,8 @@ public class DurationController {
             @ApiResponse(code = 500, message = "Failure")
     })
     @RequestMapping(value = "/duration", method = RequestMethod.GET, produces="application/json")
-    public @ResponseBody String getDuration() {
-        return durationService.fetchDuration();
+    public @ResponseBody TravelInfo getDuration(@RequestParam final String originId, @RequestParam final String destinationId) {
+        return durationService.fetchDuration(originId, destinationId);
     }
 
 }
