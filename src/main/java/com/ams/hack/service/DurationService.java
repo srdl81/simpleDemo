@@ -11,8 +11,12 @@ public class DurationService {
     @Autowired
     private DurationRepository repository;
 
-    public TravelInfo fetchDuration(String originId, String destinationId) {
-        return repository.receiveTravelTime(originId, destinationId);
+    public TravelInfo fetchDurationByIds(String originId, String destinationId) {
+        return repository.receiveTravelTimeByIds(originId, destinationId);
+    }
+
+    public TravelInfo fetchDurationByCoordinates(String originCoordLong, String originCoordLat, String destCoordLong, String destCoordLat) {
+        return repository.receiveTravelTimeByCoordinates(originCoordLong, originCoordLat, destCoordLong, destCoordLat);
     }
 
 
