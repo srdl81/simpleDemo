@@ -19,8 +19,10 @@ public class DurationController {
             @ApiResponse(code = 200, message = "Success"),
             @ApiResponse(code = 500, message = "Failure")
     })
-    @RequestMapping(value = "/duration", method = RequestMethod.GET, produces="application/json")
-    public @ResponseBody TravelInfo getDuration(@RequestParam final String originId, @RequestParam final String destinationId) {
+    @RequestMapping(value = "/duration", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody TravelInfo getDuration(
+            @RequestParam(required = false, defaultValue = "740000001") final String originId,
+            @RequestParam(required = false, defaultValue = "740000004") final String destinationId) {
         return durationService.fetchDuration(originId, destinationId);
     }
 
