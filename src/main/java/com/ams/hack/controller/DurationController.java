@@ -17,25 +17,19 @@ public class DurationController {
     @ApiOperation(value = "dasd", nickname = "dasd", produces = "application/json",
     notes = "Stockholm Centralstation - Malmö Centralstation " +
             "originId=740000001, destinationId=740000004 ")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success"),
-            @ApiResponse(code = 500, message = "Failure")
-    })
+    @ApiResponses(value = {  @ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 500, message = "Failure")})
     @RequestMapping(value = "/duration/ids", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody TravelInfo getDurationById(
-            @RequestParam final String originId,
-            @RequestParam final String destinationId
+    public @ResponseBody TravelInfo getDurationById(@RequestParam final String originId, @RequestParam final String destinationId
     ) {
         return durationService.fetchDurationByIds(originId, destinationId);
     }
+
 
     @ApiOperation(value = "dasd", nickname = "dasd", produces = "application/json",
             notes = "Stockholm Centralstation - Malmö Centralstation " +
                     "originCoordLong=18.058151, originCoordLat=59.330136" +
                     "destCoordLong=13.00091, destCoordLat=55.609456")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success"),
-            @ApiResponse(code = 500, message = "Failure")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 500, message = "Failure")
     })
     @RequestMapping(value = "/duration/coordinates", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody TravelInfo getDurationByCoordinates(
