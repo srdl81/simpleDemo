@@ -1,18 +1,18 @@
 package com.ams.hack.model;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Origin {
-    private String name;
     private String id;
-
-    @JsonProperty("lat")
+    private String name;
     private Double latitude;
-
-    @JsonProperty("lon")
     private Double longitude;
 
+    public Origin(String id, String name, Double latitude, Double longitude) {
+        this.id = id;
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 
     public String getName() {
         return name;

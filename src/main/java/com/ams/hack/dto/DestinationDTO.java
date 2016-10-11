@@ -1,18 +1,18 @@
-package com.ams.hack.model;
+package com.ams.hack.dto;
 
-public class Destination {
 
-    private String id;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class DestinationDTO {
+
     private String name;
-    private Double latitude;
-    private Double longitude;
+    private String id;
 
-    public Destination(String id, String name, Double latitude, Double longitude) {
-        this.id = id;
-        this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
+    @JsonProperty("lat")
+    private Double latitude;
+
+    @JsonProperty("lon")
+    private Double longitude;
 
     public String getName() {
         return name;

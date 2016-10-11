@@ -1,29 +1,32 @@
 package com.ams.hack.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Trip {
+    private Origin origin;
+    private Destination destination;
+    private String durationTime;
 
-    @JsonProperty("LegList")
-    private LegList legList;
-
-    private String duration;
-
-    public String getDuration() {
-        return duration;
+    public Origin getOrigin() {
+        return origin;
     }
 
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setOrigin(Origin origin) {
+        this.origin = origin;
     }
 
-    public LegList getLegList() {
-        return legList;
+    public Destination getDestination() {
+        return destination;
     }
 
-    public void setLegList(LegList legList) {
-        this.legList = legList;
+    public void setDestination(Destination destination) {
+        this.destination = destination;
+    }
+
+    public String getDurationTime() {
+        return durationTime;
+    }
+
+    public void setDurationTime(String durationTime) {
+        this.durationTime = durationTime;
     }
 }

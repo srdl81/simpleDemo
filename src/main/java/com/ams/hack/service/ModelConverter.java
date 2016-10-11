@@ -1,6 +1,7 @@
 package com.ams.hack.service;
 
 
+import com.ams.hack.dto.*;
 import com.ams.hack.model.*;
 import org.joda.time.Period;
 import org.joda.time.format.ISOPeriodFormat;
@@ -13,22 +14,30 @@ import java.util.List;
 @Component
 public class ModelConverter {
 
-    protected TravelSummaries convertToModel(TravelInfo travelInfo) {
-        List<Trip> trips = travelInfo.getTrip();
+    protected TripResult convertToModel(TripResultDTO dto) {
+        List<TripDTO> trips = dto.getTripDTO();
 
-        TravelSummaries travelSummaries = new TravelSummaries();
-        for (Trip trip: trips){
-            TravelSummary summary = new TravelSummary();
-            String duration = trip.getDuration();
-            summary.setDurationTime(prettyPrint(duration));
-            for (Leg leg: trip.getLegList().getLegs()){
-                summary.setDestination(leg.getDestination());
-                summary.setOrigin(leg.getOrigin());
+        TripResult tripResult = new TripResult();
+        for (TripDTO tripDTO: trips){
+            Trip trip = new Trip();
+            String duration = tripDTO.getDuration();
+            trip.setDurationTime(prettyPrint(duration));
+            for (LegDTO legDTO: tripDTO.getLegListDTO().getLegDTOs()){
+                trip.setDestination(covertDestinaton(legDTO.getDestinationDTO()));
+                trip.setOrigin(convertOrigin(legDTO.getOriginDTO()));
             }
-            travelSummaries.getTrips().add(summary);
+            tripResult.getTrips().add(trip);
         }
 
-        return travelSummaries;
+        return tripResult;
+    }
+
+    private Origin convertOrigin(OriginDTO dto) {
+        return new Origin(dto.getId(), dto.getName(), dto.getLatitude(), dto.getLongitude());
+    }
+
+    private Destination covertDestinaton(DestinationDTO dto) {
+         return new Destination(dto.getId(), dto.getName(), dto.getLatitude(), dto.getLongitude());
     }
 
     private String prettyPrint(String duration) {
@@ -39,12 +48,12 @@ public class ModelConverter {
                 .minimumPrintedDigits(1)
                 .appendSeparator(" ")
                 .appendHours()
-                .appendSuffix(" h")
+                .appendSuffix("h")
                 .appendSeparator(" ")
                 .printZeroAlways()
                 .minimumPrintedDigits(2)
                 .appendMinutes()
-                .appendSuffix(" min ")
+                .appendSuffix(" min")
                 .toFormatter();
 
         return periodFormatter.print(period);
