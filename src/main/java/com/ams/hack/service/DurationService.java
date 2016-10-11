@@ -55,7 +55,7 @@ public class DurationService {
                 .minimumPrintedDigits(1)
                 .appendSeparator(" ")
                 .appendHours()
-                .appendSuffix(" h")
+                .appendSuffix(" h ")
                 .appendSeparator("")
                 .printZeroAlways()
                 .minimumPrintedDigits(2)
