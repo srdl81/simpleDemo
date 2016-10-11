@@ -28,7 +28,7 @@ public class DurationController {
 
     @ApiOperation(value = "Receive duration by coordinates.", nickname = "dasd", produces = "application/json",
             notes = "Stockholm Centralstation - Malmö Centralstation " +
-                    "originCoordLong=18.058151, originCoordLat=59.330136" +
+                    "originCoordLong=18.058151, originCoordLat=59.330136 " +
                     "destCoordLong=13.00091, destCoordLat=55.609456")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 500, message = "Failure")})
     @RequestMapping(value = "/duration/trip/coordinates", method = RequestMethod.GET, produces = "application/json")
