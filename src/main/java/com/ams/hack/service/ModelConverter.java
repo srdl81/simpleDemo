@@ -23,8 +23,8 @@ public class ModelConverter {
             String duration = tripDTO.getDuration();
             trip.setDurationTime(prettyPrint(duration));
             for (LegDTO legDTO: tripDTO.getLegListDTO().getLegDTOs()){
-                trip.setDestination(covertDestinaton(legDTO.getDestinationDTO()));
-                trip.setOrigin(convertOrigin(legDTO.getOriginDTO()));
+                trip.setDestination(covertDestinatonDTO(legDTO.getDestinationDTO()));
+                trip.setOrigin(convertOriginDTO(legDTO.getOriginDTO()));
             }
             tripResult.getTrips().add(trip);
         }
@@ -32,11 +32,11 @@ public class ModelConverter {
         return tripResult;
     }
 
-    private Origin convertOrigin(OriginDTO dto) {
+    private Origin convertOriginDTO(OriginDTO dto) {
         return new Origin(dto.getId(), dto.getName(), dto.getLatitude(), dto.getLongitude());
     }
 
-    private Destination covertDestinaton(DestinationDTO dto) {
+    private Destination covertDestinatonDTO(DestinationDTO dto) {
          return new Destination(dto.getId(), dto.getName(), dto.getLatitude(), dto.getLongitude());
     }
 
