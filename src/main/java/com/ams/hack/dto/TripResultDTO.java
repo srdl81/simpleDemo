@@ -11,14 +11,11 @@ import java.util.List;
 public class TripResultDTO {
 
     @JsonProperty("Trip")
-    private List<TripDTO> tripDTO = new ArrayList<>();
+    private List<TripDTO> tripDTOs = new ArrayList<>();
 
 
-    public List<TripDTO> getTripDTO() {
-        return tripDTO;
+    public List<TripDTO> getTripDTOs() {
+        return tripDTOs;
     }
 
-    public void setTripDTO(List<TripDTO> tripDTO) {
-        this.tripDTO = tripDTO;
-    }
 }

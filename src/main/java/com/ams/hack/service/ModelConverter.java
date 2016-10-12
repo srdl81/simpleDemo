@@ -15,16 +15,20 @@ import java.util.List;
 public class ModelConverter {
 
     protected TripResult convertToModel(TripResultDTO dto) {
-        List<TripDTO> trips = dto.getTripDTO();
+        List<TripDTO> trips = dto.getTripDTOs();
 
         TripResult tripResult = new TripResult();
         for (TripDTO tripDTO: trips){
             Trip trip = new Trip();
             String duration = tripDTO.getDuration();
             trip.setDurationTime(prettyPrint(duration));
-            for (LegDTO legDTO: tripDTO.getLegListDTO().getLegDTOs()){
-                trip.setDestination(covertDestinatonDTO(legDTO.getDestinationDTO()));
-                trip.setOrigin(convertOriginDTO(legDTO.getOriginDTO()));
+
+            LegListDTO legListDTO = tripDTO.getLegListDTO();
+            for (LegDTO legDTO: legListDTO.getLegDTOs()) {
+                Leg leg = new Leg();
+                leg.setDestination(covertDestinatonDTO(legDTO.getDestinationDTO()));
+                leg.setOrigin(convertOriginDTO(legDTO.getOriginDTO()));
+                trip.getLegList().getLegs().add(leg);
             }
             tripResult.getTrips().add(trip);
         }
@@ -33,11 +37,11 @@ public class ModelConverter {
     }
 
     private Origin convertOriginDTO(OriginDTO dto) {
-        return new Origin(dto.getId(), dto.getName(), dto.getLatitude(), dto.getLongitude());
+        return new Origin(dto.getId(), dto.getName(), new Coordinates(dto.getLatitude(), dto.getLongitude()));
     }
 
     private Destination covertDestinatonDTO(DestinationDTO dto) {
-         return new Destination(dto.getId(), dto.getName(), dto.getLatitude(), dto.getLongitude());
+         return new Destination(dto.getId(), dto.getName(),new Coordinates(dto.getLatitude(), dto.getLongitude()));
     }
 
     private String prettyPrint(String duration) {

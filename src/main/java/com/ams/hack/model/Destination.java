@@ -4,14 +4,12 @@ public class Destination {
 
     private String id;
     private String name;
-    private Double latitude;
-    private Double longitude;
+    private Coordinates coordinates;
 
-    public Destination(String id, String name, Double latitude, Double longitude) {
+    public Destination(String id, String name, Coordinates coordinates) {
         this.id = id;
         this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.coordinates = coordinates;
     }
 
     public String getName() {
@@ -30,19 +28,11 @@ public class Destination {
         this.id = id;
     }
 
-    public Double getLatitude() {
-        return latitude;
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
     }
 }

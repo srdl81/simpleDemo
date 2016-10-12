@@ -18,7 +18,7 @@ public class DurationRepository {
     }
 
     private String getURL(String originId, String destinationId) {
-        return BASE_URL + API_KEY + "&originId=" + originId + "&destId=" + destinationId + "&passlist=0&date=2016-10-10&time=08:00&format=json";
+        return BASE_URL + API_KEY + "&originId=" + originId + "&destId=" + destinationId + "&passlist=0&date=2016-10-12&time=09:19&format=json";
     }
 
     public TripResultDTO receiveTravelTimeByCoordinates(String originCoordLong, String originCoordLat, String destCoordLong, String destCoordLat) {

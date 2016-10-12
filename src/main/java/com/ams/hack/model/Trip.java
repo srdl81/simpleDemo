@@ -2,24 +2,12 @@ package com.ams.hack.model;
 
 
 public class Trip {
-    private Origin origin;
-    private Destination destination;
+
+    private LegList legList = new LegList();
     private String durationTime;
 
-    public Origin getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(Origin origin) {
-        this.origin = origin;
-    }
-
-    public Destination getDestination() {
-        return destination;
-    }
-
-    public void setDestination(Destination destination) {
-        this.destination = destination;
+    public LegList getLegList() {
+        return legList;
     }
 
     public String getDurationTime() {
