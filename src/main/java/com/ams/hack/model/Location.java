@@ -7,6 +7,9 @@ public class Location {
     private String name;
     private Coordinates coordinates;
 
+    public Location() {
+    }
+
     public String getId() {
         return id;
     }

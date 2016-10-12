@@ -10,6 +10,7 @@ import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ModelConverter {
@@ -18,13 +19,13 @@ public class ModelConverter {
         List<TripDTO> trips = dto.getTripDTOs();
 
         TripResult tripResult = new TripResult();
-        for (TripDTO tripDTO: trips){
+        for (TripDTO tripDTO : trips) {
             Trip trip = new Trip();
             String duration = tripDTO.getDuration();
             trip.setDurationTime(prettyPrint(duration));
 
             LegListDTO legListDTO = tripDTO.getLegListDTO();
-            for (LegDTO legDTO: legListDTO.getLegDTOs()) {
+            for (LegDTO legDTO : legListDTO.getLegDTOs()) {
                 Leg leg = new Leg();
                 leg.setDestination(covertDestinatonDTO(legDTO.getDestinationDTO()));
                 leg.setOrigin(convertOriginDTO(legDTO.getOriginDTO()));
@@ -41,7 +42,7 @@ public class ModelConverter {
     }
 
     private Destination covertDestinatonDTO(DestinationDTO dto) {
-         return new Destination(dto.getId(), dto.getName(),new Coordinates(dto.getLatitude(), dto.getLongitude()));
+        return new Destination(dto.getId(), dto.getName(), new Coordinates(dto.getLatitude(), dto.getLongitude()));
     }
 
     private String prettyPrint(String duration) {
@@ -64,16 +65,25 @@ public class ModelConverter {
     }
 
     public LocationResult convertToModel(LocationResultDTO resultDTO) {
+
+        List<Location> locations = resultDTO.getLocationDTOs()
+                        .stream()
+                        .map(locationDTO -> createLocation(locationDTO))
+                        .collect(Collectors.toList());
+
         LocationResult model = new LocationResult();
-        for (LocationDTO dto : resultDTO.getLocationDTOs()) {
-            Location location = new Location();
-            location.setId(dto.getId());
-            location.setName(dto.getName());
-            location.setCoordinates(new Coordinates(dto.getLat(), dto.getLon()));
-            model.getLocations().add(location);
-        }
+        model.getLocations().addAll(locations);
 
         return model;
     }
+
+    private Location createLocation(LocationDTO locationDTO) {
+        return LocationBuilder.aLocation()
+                .withId(locationDTO.getId())
+                .withName(locationDTO.getName())
+                .withCoordinates(new Coordinates(locationDTO.getLat(), locationDTO.getLon()))
+                .build();
+    }
+
 
 }
