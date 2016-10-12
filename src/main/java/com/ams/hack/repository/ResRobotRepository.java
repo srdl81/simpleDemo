@@ -9,8 +9,8 @@ public class ResRobotRepository {
 
     private static final String TRIP = "trip?";
     private static final String LOCATION = "location.name.json?";
-    String BASE_URL = "https://api.resrobot.se/v2/";
-    String API_KEY = "key=ff90d649-2b80-4bed-919d-cc672472a742";
+    private static final String BASE_URL = "https://api.resrobot.se/v2/";
+    private static final String API_KEY = "key=ff90d649-2b80-4bed-919d-cc672472a742";
 
     private RestTemplate restTemplate = new RestTemplate();
 
