@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class DurationRepository {
+public class ResRobotRepository {
 
-    String BASE_URL = "https://api.resrobot.se/v2/trip?";
+    private static final String TRIP = "trip?";
+    private static final String LOCATION = "location.name.json?";
+    String BASE_URL = "https://api.resrobot.se/v2/";
     String API_KEY = "key=ff90d649-2b80-4bed-919d-cc672472a742";
 
     private RestTemplate restTemplate = new RestTemplate();
@@ -18,11 +20,16 @@ public class DurationRepository {
     }
 
     private String getURL(String originId, String destinationId) {
-        return BASE_URL + API_KEY + "&originId=" + originId + "&destId=" + destinationId + "&passlist=0&date=2016-10-12&time=09:19&format=json";
+        return BASE_URL + TRIP + API_KEY + "&originId=" + originId + "&destId=" + destinationId + "&passlist=0&date=2016-10-12&time=09:19&format=json";
     }
 
     public TripResultDTO receiveTravelTimeByCoordinates(String originCoordLong, String originCoordLat, String destCoordLong, String destCoordLat) {
-        String url = BASE_URL + API_KEY + "&originCoordLong=" + originCoordLong + "&originCoordLat=" + originCoordLat + "&destCoordLong=" + destCoordLong + "&destCoordLat=" + destCoordLat + "&passlist=0&date=2016-10-10&time=08:00&format=json";
+        String url = BASE_URL + TRIP + API_KEY + "&originCoordLong=" + originCoordLong + "&originCoordLat=" + originCoordLat + "&destCoordLong=" + destCoordLong + "&destCoordLat=" + destCoordLat + "&passlist=0&date=2016-10-10&time=08:00&format=json";
         return restTemplate.getForObject(url, TripResultDTO.class);
+    }
+
+    public String receiveLocations(String q) {
+        String url = BASE_URL + LOCATION + API_KEY + "&input=" + q;
+        return restTemplate.getForObject(url, String.class);
     }
 }

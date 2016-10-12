@@ -2,7 +2,7 @@ package com.ams.hack.service;
 
 import com.ams.hack.dto.TripResultDTO;
 import com.ams.hack.model.*;
-import com.ams.hack.repository.DurationRepository;
+import com.ams.hack.repository.ResRobotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class DurationService {
 
     @Autowired
-    private DurationRepository repository;
+    private ResRobotRepository repository;
 
     @Autowired
     private ModelConverter modelConverter;

@@ -18,7 +18,7 @@ public class DurationController {
     notes = "Stockholm Centralstation - Malmö Centralstation " +
             "originId=740000001, destinationId=740000004 ")
     @ApiResponses(value = {  @ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 500, message = "Failure")})
-    @RequestMapping(value = "/duration/trip/ids", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/duration/trip/ids", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public @ResponseBody
     TripResult getDurationById(@RequestParam final String originId, @RequestParam final String destinationId
     ) {
@@ -31,7 +31,7 @@ public class DurationController {
                     "originCoordLong=18.058151, originCoordLat=59.330136 " +
                     "destCoordLong=13.00091, destCoordLat=55.609456")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 500, message = "Failure")})
-    @RequestMapping(value = "/duration/trip/coordinates", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/duration/trip/coordinates", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public @ResponseBody
     TripResult getDurationByCoordinates(
             @RequestParam final String originCoordLong,

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -29,7 +30,7 @@ public class SwaggerConfiguration {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .contact("serdil.akyuz@arbetsformedlingen.se")
+                .contact(new Contact("Serdil Akyüz", "www.nba.com", "serdil.akyuz@arbetsformedlingen.se"))
                 .title("Trip Duration API")
                 .description("platsbankenLabz")
                 .version("1.0")
@@ -38,7 +39,7 @@ public class SwaggerConfiguration {
 
     private Predicate<String> paths() {
         return or(
-                regex("/duration.*"));
+                regex("/duration.*"), regex("/location.*"));
     }
 
 }
