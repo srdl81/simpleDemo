@@ -1,6 +1,6 @@
 package com.ams.hack.controller;
 
-
+import com.ams.hack.model.LocationResult;
 import com.ams.hack.service.LocationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +19,7 @@ public class LocationController {
     @ApiOperation(value = "Receive location suggestions", nickname = "location", produces = "application/json;charset=utf-8", notes = "")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 500, message = "Failure")})
     @RequestMapping(value = "/location/{location}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody String getDurationByCoordinates(@PathVariable(value = "location") String location) {
+    public @ResponseBody LocationResult getDurationByCoordinates(@PathVariable(value = "location") String location) {
 
         return locationService.fetchLocations(location);
     }

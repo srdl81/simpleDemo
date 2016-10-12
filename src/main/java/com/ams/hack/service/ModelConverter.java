@@ -62,4 +62,18 @@ public class ModelConverter {
 
         return periodFormatter.print(period);
     }
+
+    public LocationResult convertToModel(LocationResultDTO resultDTO) {
+        LocationResult model = new LocationResult();
+        for (LocationDTO dto : resultDTO.getLocationDTOs()) {
+            Location location = new Location();
+            location.setId(dto.getId());
+            location.setName(dto.getName());
+            location.setCoordinates(new Coordinates(dto.getLat(), dto.getLon()));
+            model.getLocations().add(location);
+        }
+
+        return model;
+    }
+
 }

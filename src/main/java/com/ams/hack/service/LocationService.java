@@ -1,5 +1,7 @@
 package com.ams.hack.service;
 
+import com.ams.hack.dto.LocationResultDTO;
+import com.ams.hack.model.LocationResult;
 import com.ams.hack.repository.ResRobotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +16,10 @@ public class LocationService {
     @Autowired
     private ModelConverter modelConverter;
 
+    public LocationResult fetchLocations(String q) {
+        LocationResultDTO dto = repository.receiveLocations(q);
 
-    public String fetchLocations(String q) {
-        String dto = repository.receiveLocations(q);
-        return dto;
-//        return modelConverter.convertToModel(dto);
+        return modelConverter.convertToModel(dto);
     }
 
 }

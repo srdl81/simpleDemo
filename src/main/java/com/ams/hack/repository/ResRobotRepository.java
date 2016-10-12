@@ -1,5 +1,6 @@
 package com.ams.hack.repository;
 
+import com.ams.hack.dto.LocationResultDTO;
 import com.ams.hack.dto.TripResultDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -28,8 +29,8 @@ public class ResRobotRepository {
         return restTemplate.getForObject(url, TripResultDTO.class);
     }
 
-    public String receiveLocations(String q) {
+    public LocationResultDTO receiveLocations(String q) {
         String url = BASE_URL + LOCATION + API_KEY + "&input=" + q;
-        return restTemplate.getForObject(url, String.class);
+        return restTemplate.getForObject(url, LocationResultDTO.class);
     }
 }
