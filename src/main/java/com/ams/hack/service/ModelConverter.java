@@ -37,6 +37,27 @@ public class ModelConverter {
         return tripResult;
     }
 
+    public LocationResult convertToModel(LocationResultDTO resultDTO) {
+
+        List<Location> locations = resultDTO.getLocationDTOs()
+                .stream()
+                .map(locationDTO -> createLocation(locationDTO))
+                .collect(Collectors.toList());
+
+        LocationResult model = new LocationResult();
+        model.getLocations().addAll(locations);
+
+        return model;
+    }
+
+    private Location createLocation(LocationDTO locationDTO) {
+        return LocationBuilder.aLocation()
+                .withId(locationDTO.getId())
+                .withName(locationDTO.getName())
+                .withCoordinates(new Coordinates(locationDTO.getLat(), locationDTO.getLon()))
+                .build();
+    }
+
     private Origin convertOriginDTO(OriginDTO dto) {
         return new Origin(dto.getId(), dto.getName(), new Coordinates(dto.getLatitude(), dto.getLongitude()));
     }
@@ -63,27 +84,5 @@ public class ModelConverter {
 
         return periodFormatter.print(period);
     }
-
-    public LocationResult convertToModel(LocationResultDTO resultDTO) {
-
-        List<Location> locations = resultDTO.getLocationDTOs()
-                        .stream()
-                        .map(locationDTO -> createLocation(locationDTO))
-                        .collect(Collectors.toList());
-
-        LocationResult model = new LocationResult();
-        model.getLocations().addAll(locations);
-
-        return model;
-    }
-
-    private Location createLocation(LocationDTO locationDTO) {
-        return LocationBuilder.aLocation()
-                .withId(locationDTO.getId())
-                .withName(locationDTO.getName())
-                .withCoordinates(new Coordinates(locationDTO.getLat(), locationDTO.getLon()))
-                .build();
-    }
-
 
 }
