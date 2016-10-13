@@ -24,8 +24,7 @@ public class ModelConverter {
             String duration = tripDTO.getDuration();
             trip.setDurationTime(prettyPrint(duration));
 
-            LegListDTO legListDTO = tripDTO.getLegListDTO();
-            for (LegDTO legDTO : legListDTO.getLegDTOs()) {
+            for (LegDTO legDTO : tripDTO.getLegListDTO().getLegDTOs()) {
                 Leg leg = new Leg();
                 leg.setDestination(covertDestinatonDTO(legDTO.getDestinationDTO()));
                 leg.setOrigin(convertOriginDTO(legDTO.getOriginDTO()));
