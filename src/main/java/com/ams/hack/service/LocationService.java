@@ -22,4 +22,9 @@ public class LocationService {
         return modelConverter.convertToModel(dto);
     }
 
+    public LocationResult fetchStationsAndStopsBy(String latitude, String longitude) {
+        LocationResultDTO dto = repository.receiveNearbyStopsAndLocations(latitude, longitude);
+
+        return modelConverter.convertToModel(dto);
+    }
 }

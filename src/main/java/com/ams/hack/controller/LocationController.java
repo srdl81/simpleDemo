@@ -19,8 +19,17 @@ public class LocationController {
     @ApiOperation(value = "Receive location suggestions", nickname = "location", produces = "application/json;charset=utf-8", notes = "")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 500, message = "Failure")})
     @RequestMapping(value = "/location/{location}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody LocationResult getDurationByCoordinates(@PathVariable(value = "location") String location) {
+    public @ResponseBody LocationResult getLocationSuggestions(@PathVariable(value = "location") String location) {
 
         return locationService.fetchLocations(location);
+    }
+
+    @ApiOperation(value = "Find stations and stops near a coordinate", nickname = "location", produces = "application/json;charset=utf-8", notes = "")
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 500, message = "Failure")})
+    @RequestMapping(value = "/location/nearbystops", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody LocationResult getStationsAndStopsByCoordinates(  @RequestParam final String latitude,
+                                                                           @RequestParam final String longitude) {
+
+        return locationService.fetchStationsAndStopsBy(latitude, longitude);
     }
 }

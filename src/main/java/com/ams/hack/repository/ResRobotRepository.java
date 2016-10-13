@@ -10,6 +10,7 @@ public class ResRobotRepository {
 
     private static final String TRIP = "trip?";
     private static final String LOCATION = "location.name.json?";
+    private static final String NEARBY_STOPS = "location.nearbystops.json?";
     private static final String BASE_URL = "https://api.resrobot.se/v2/";
     private static final String API_KEY = "key=ff90d649-2b80-4bed-919d-cc672472a742";
 
@@ -33,4 +34,11 @@ public class ResRobotRepository {
         String url = BASE_URL + LOCATION + API_KEY + "&input=" + q;
         return restTemplate.getForObject(url, LocationResultDTO.class);
     }
+
+    public LocationResultDTO receiveNearbyStopsAndLocations(String originCoordLat, String originCoordLong) {
+        String url = BASE_URL + NEARBY_STOPS + API_KEY + "&originCoordLat=" + originCoordLat + "&originCoordLong=" + originCoordLong;
+
+        return restTemplate.getForObject(url, LocationResultDTO.class);
+    }
+
 }
