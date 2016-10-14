@@ -2,8 +2,13 @@ package com.ams.hack.repository;
 
 import com.ams.hack.dto.LocationResultDTO;
 import com.ams.hack.dto.TripResultDTO;
+import com.ams.hack.utils.GeneralDateUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.time.LocalDate;
+
+import static com.ams.hack.utils.GeneralDateUtils.*;
 
 @Service
 public class ResRobotRepository {
@@ -22,11 +27,14 @@ public class ResRobotRepository {
     }
 
     private String getURL(String originId, String destinationId) {
-        return BASE_URL + TRIP + API_KEY + "&originId=" + originId + "&destId=" + destinationId + "&passlist=0&date=2016-10-12&time=09:19&format=json";
+
+        String date = calculateNextBusinessDate(LocalDate.now());
+        return BASE_URL + TRIP + API_KEY + "&originId=" + originId + "&destId=" + destinationId + "&passlist=0&date=" + date+ "&time=07:30&format=json";
     }
 
     public TripResultDTO receiveTravelTimeByCoordinates(String originCoordLong, String originCoordLat, String destCoordLong, String destCoordLat) {
-        String url = BASE_URL + TRIP + API_KEY + "&originCoordLong=" + originCoordLong + "&originCoordLat=" + originCoordLat + "&destCoordLong=" + destCoordLong + "&destCoordLat=" + destCoordLat + "&passlist=0&date=2016-10-10&time=08:00&format=json";
+        String date = calculateNextBusinessDate(LocalDate.now());
+        String url = BASE_URL + TRIP + API_KEY + "&originCoordLong=" + originCoordLong + "&originCoordLat=" + originCoordLat + "&destCoordLong=" + destCoordLong + "&destCoordLat=" + destCoordLat + "&passlist=0&date=" + date + "&time=07:30&format=json";
         return restTemplate.getForObject(url, TripResultDTO.class);
     }
 

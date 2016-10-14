@@ -9,6 +9,8 @@ import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.stereotype.Component;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,5 +85,7 @@ public class ModelConverter {
 
         return periodFormatter.print(period);
     }
+
+
 
 }
