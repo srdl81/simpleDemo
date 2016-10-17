@@ -52,7 +52,7 @@ public class URIBuilderUtils {
         return uriComponents.toUriString();
     }
 
-    public static String buildURLForCoordinates(String originCoordLong, String originCoordLat, String destCoordLong, String destCoordLat) {
+    public static String buildURLForCoordinates(String originCoordLat, String originCoordLong, String destCoordLat, String destCoordLong) {
 
         UriComponents uriComponents =
                 UriComponentsBuilder.newInstance()
