@@ -3,9 +3,11 @@ package com.ams.hack.repository;
 import com.ams.hack.dto.LocationResultDTO;
 import com.ams.hack.dto.TripResultDTO;
 
+import com.ams.hack.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import static com.ams.hack.utils.URIBuilderUtils.*;
 
@@ -19,7 +21,11 @@ public class ResRobotRepository {
         String url = buildURLForIds(originId, destinationId);
         LOGGER.info(String.format("Request with url:%s", url));
 
-        return restTemplate.getForObject(url, TripResultDTO.class);
+        try {
+            return restTemplate.getForObject(url, TripResultDTO.class);
+        } catch (RestClientException e) {
+           throw new NotFoundException(originId, destinationId);
+        }
     }
 
     public TripResultDTO receiveTravelTimeByCoordinates(String originCoordLat, String originCoordLong, String destCoordLat, String destCoordLong) {
