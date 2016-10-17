@@ -23,8 +23,8 @@ public class DurationService {
         return modelConverter.convertToModel(dto);
     }
 
-    public TripResult fetchDurationByCoordinates(String originCoordLong, String originCoordLat, String destCoordLong, String destCoordLat) {
-        TripResultDTO dto = repository.receiveTravelTimeByCoordinates(originCoordLong, originCoordLat, destCoordLong, destCoordLat);
+    public TripResult fetchDurationByCoordinates(String originCoordLat, String originCoordLong, String destCoordLat, String destCoordLong) {
+        TripResultDTO dto = repository.receiveTravelTimeByCoordinates(originCoordLat, originCoordLong, destCoordLat, destCoordLong);
 
         return modelConverter.convertToModel(dto);
     }

@@ -22,8 +22,8 @@ public class ResRobotRepository {
         return restTemplate.getForObject(url, TripResultDTO.class);
     }
 
-    public TripResultDTO receiveTravelTimeByCoordinates(String originCoordLong, String originCoordLat, String destCoordLong, String destCoordLat) {
-        String url = buildURLForCoordinates(originCoordLong, originCoordLat, destCoordLong, destCoordLat);
+    public TripResultDTO receiveTravelTimeByCoordinates(String originCoordLat, String originCoordLong, String destCoordLat, String destCoordLong) {
+        String url = buildURLForCoordinates(originCoordLat, originCoordLong, destCoordLat, destCoordLong);
         LOGGER.info(String.format("Request with url:%s", url));
 
         return restTemplate.getForObject(url, TripResultDTO.class);

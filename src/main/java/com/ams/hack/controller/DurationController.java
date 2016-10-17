@@ -33,11 +33,11 @@ public class DurationController {
     @RequestMapping(value = "/duration/trip/coordinates", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public @ResponseBody
     TripResult getDurationByCoordinates(
-            @RequestParam final String originCoordLong,
             @RequestParam final String originCoordLat,
-            @RequestParam final String destCoordLong,
-            @RequestParam final String destCoordLat) {
-        return durationService.fetchDurationByCoordinates(originCoordLong, originCoordLat, destCoordLong, destCoordLat);
+            @RequestParam final String originCoordLong,
+            @RequestParam final String destCoordLat,
+            @RequestParam final String destCoordLong) {
+        return durationService.fetchDurationByCoordinates(originCoordLat, originCoordLong, destCoordLat, destCoordLong);
     }
 
 }
