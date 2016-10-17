@@ -19,6 +19,7 @@ public class DurationService {
 
     public TripResult fetchDurationByIds(String originId, String destinationId) {
         TripResultDTO dto = repository.receiveTravelTimeByIds(originId, destinationId);
+
         return modelConverter.convertToModel(dto);
     }
 
