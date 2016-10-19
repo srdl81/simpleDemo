@@ -19,12 +19,11 @@ public class ResRobotRepository {
 
     public TripResultDTO receiveTravelTimeByIds(String originId, String destinationId){
         String url = buildURLForIds(originId, destinationId);
-        LOGGER.info(String.format("Request with url:%s", url));
-
         try {
             return restTemplate.getForObject(url, TripResultDTO.class);
         } catch (RestClientException e) {
-           throw new NotFoundException(originId, destinationId);
+            LOGGER.error(String.format("Error when request made with url:%s", url));
+            throw new NotFoundException(originId, destinationId);
         }
     }
 
