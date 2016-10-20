@@ -25,21 +25,21 @@ public class ResRobotRepository {
 
     public TripResultDTO receiveTravelTimeByCoordinates(String originCoordLat, String originCoordLong, String destCoordLat, String destCoordLong) {
         String url = buildURLForCoordinates(originCoordLat, originCoordLong, destCoordLat, destCoordLong);
-        LOGGER.info(String.format("Request with url:%s", url));
+        LOGGER.info(String.format("ResRobotRepository.receiveTravelTimeByCoordinates with url:%s", url));
 
         return restTemplate.getForObject(url, TripResultDTO.class);
     }
 
     public LocationResultDTO receiveLocations(String q) {
         String url = buildURLForLocation(q);
-        LOGGER.info(String.format("Request with url:%s", url));
+        LOGGER.info(String.format("ResRobotRepository.receiveLocations with url:%s", url));
 
         return restTemplate.getForObject(url, LocationResultDTO.class);
     }
 
     public LocationResultDTO receiveNearbyStopsAndLocations(String originCoordLat, String originCoordLong) {
         String url = buildURLForLocationWithCoordinates(originCoordLat, originCoordLong);
-        LOGGER.info(String.format("Request with url:%s", url));
+        LOGGER.info(String.format("ResRobotRepository.receiveNearbyStopsAndLocations with url:%s", url));
 
         return restTemplate.getForObject(url, LocationResultDTO.class);
     }
