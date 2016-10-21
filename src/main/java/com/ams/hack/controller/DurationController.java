@@ -20,8 +20,7 @@ public class DurationController {
             "destinationId=740000759")
     @ApiResponses(value = {  @ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 500, message = "Failure")})
     @RequestMapping(value = "/duration/trip/ids", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public @ResponseBody
-    TripResult getDurationById(@RequestParam final String originId, @RequestParam final String destinationId) {
+    public @ResponseBody TripResult getDurationById(@RequestParam final String originId, @RequestParam final String destinationId) {
         return durationService.fetchDurationByIds(originId, destinationId);
     }
 
@@ -37,8 +36,7 @@ public class DurationController {
                     " longitude=18.010041)")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 500, message = "Failure")})
     @RequestMapping(value = "/duration/trip/coordinates", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
-    public @ResponseBody
-    TripResult getDurationByCoordinates(
+    public @ResponseBody TripResult getDurationByCoordinates(
             @RequestParam final String originCoordLat,
             @RequestParam final String originCoordLong,
             @RequestParam final String destCoordLat,
