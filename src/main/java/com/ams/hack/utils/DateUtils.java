@@ -8,7 +8,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 
-public class GeneralDateUtils {
+public class DateUtils {
 
     private static HolidayManager holydayManager =  HolidayManager.getInstance(HolidayCalendar.SWEDEN);
 
@@ -35,7 +35,7 @@ public class GeneralDateUtils {
 
     public static String calculateNextBusinessDate(LocalDate localDate) {
         LocalDate date = localDate.plusDays(1);
-        while (!GeneralDateUtils.isBusinessDay(date)) {
+        while (!DateUtils.isBusinessDay(date)) {
             date = date.plusDays(1);
         }
 

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class GeneralDateUtilsTest {
+public class DateUtilsTest {
 
     @Test
     public void verifyThatNextBusinessDayIsAfterWeekendAndChristmas() {
@@ -14,7 +14,7 @@ public class GeneralDateUtilsTest {
         LocalDate localDate = LocalDate.of(2017,12, 22);
 
         //When:
-        String nextBusinessDate = GeneralDateUtils.calculateNextBusinessDate(localDate);
+        String nextBusinessDate = DateUtils.calculateNextBusinessDate(localDate);
 
         //Then:
         assertTrue(nextBusinessDate.equals("2017-12-27"));
@@ -27,7 +27,7 @@ public class GeneralDateUtilsTest {
         LocalDate localDate = LocalDate.of(2017,12, 8);
 
        //When:
-        String nextBusinessDate = GeneralDateUtils.calculateNextBusinessDate(localDate);
+        String nextBusinessDate = DateUtils.calculateNextBusinessDate(localDate);
 
         //Then:
         assertTrue(nextBusinessDate.equals("2017-12-11"));
@@ -40,7 +40,7 @@ public class GeneralDateUtilsTest {
         LocalDate localDate = LocalDate.of(2017, 12, 16);
 
         //When:
-        boolean hollyday = GeneralDateUtils.isBusinessDay(localDate);
+        boolean hollyday = DateUtils.isBusinessDay(localDate);
 
         //Then:
         assertFalse(hollyday);
@@ -53,7 +53,7 @@ public class GeneralDateUtilsTest {
         LocalDate localDate = LocalDate.of(2017, 12, 18);
 
         //When:
-        boolean hollyday = GeneralDateUtils.isBusinessDay(localDate);
+        boolean hollyday = DateUtils.isBusinessDay(localDate);
 
         //Then:
         assertTrue(hollyday);
@@ -65,7 +65,7 @@ public class GeneralDateUtilsTest {
         LocalDate localDate = LocalDate.of(2017, 10, 18);
 
         //When:
-        boolean hollyday = GeneralDateUtils.isHollyday(localDate);
+        boolean hollyday = DateUtils.isHollyday(localDate);
 
         //Then:
         assertFalse(hollyday);
@@ -77,7 +77,7 @@ public class GeneralDateUtilsTest {
         LocalDate localDate = LocalDate.of(2017, 06, 06);
 
         //When:
-        boolean hollyday = GeneralDateUtils.isHollyday(localDate);
+        boolean hollyday = DateUtils.isHollyday(localDate);
 
         //Then:
         assertTrue(hollyday);
@@ -89,7 +89,7 @@ public class GeneralDateUtilsTest {
         LocalDate localDate = LocalDate.of(2016, 12, 25);
 
        //When:
-        boolean hollyday = GeneralDateUtils.isHollyday(localDate);
+        boolean hollyday = DateUtils.isHollyday(localDate);
 
         //Then:
         assertTrue(hollyday);
@@ -101,7 +101,7 @@ public class GeneralDateUtilsTest {
         LocalDate localDate = LocalDate.of(2016, 10, 15);
 
         //when
-        boolean workingDay = GeneralDateUtils.isWorkingDay(localDate);
+        boolean workingDay = DateUtils.isWorkingDay(localDate);
 
         //then
         assertFalse(workingDay);
@@ -113,7 +113,7 @@ public class GeneralDateUtilsTest {
         LocalDate localDate = LocalDate.of(2016, 10, 14);
 
         //when
-        boolean workingDay = GeneralDateUtils.isWorkingDay(localDate);
+        boolean workingDay = DateUtils.isWorkingDay(localDate);
 
         //then
         assertTrue(workingDay);

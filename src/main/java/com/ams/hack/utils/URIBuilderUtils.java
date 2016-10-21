@@ -6,7 +6,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDate;
 
-import static com.ams.hack.utils.GeneralDateUtils.*;
+import static com.ams.hack.utils.DateUtils.*;
 
 public class URIBuilderUtils {
 
