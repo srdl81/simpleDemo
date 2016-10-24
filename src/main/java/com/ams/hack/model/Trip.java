@@ -4,17 +4,17 @@ package com.ams.hack.model;
 public class Trip {
 
     private LegList legList = new LegList();
-    private String durationTime;
+    private String duration;
 
     public LegList getLegList() {
         return legList;
     }
 
-    public String getDurationTime() {
-        return durationTime;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setDurationTime(String durationTime) {
-        this.durationTime = durationTime;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 }

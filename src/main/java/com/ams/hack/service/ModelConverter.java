@@ -21,7 +21,7 @@ public class ModelConverter {
         for (TripDTO tripDTO : trips) {
             Trip trip = new Trip();
             String duration = tripDTO.getDuration();
-            trip.setDurationTime(prettyPrint(duration));
+            trip.setDuration(duration);
 
             for (LegDTO legDTO : tripDTO.getLegListDTO().getLegDTOs()) {
                 Leg leg = new Leg();
@@ -82,7 +82,5 @@ public class ModelConverter {
 
         return periodFormatter.print(period);
     }
-
-
 
 }
