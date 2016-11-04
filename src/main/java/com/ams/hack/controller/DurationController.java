@@ -18,10 +18,13 @@ public class DurationController {
     notes = "Älvsjö Station - Solna station " +
             "originId=740000789, " +
             "destinationId=740000759")
-    @ApiResponses(value = {  @ApiResponse(code = 200, message = "Success"), @ApiResponse(code = 500, message = "Failure")})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success"),
+            @ApiResponse(code = 500, message = "Failure")})
     @RequestMapping(value = "/duration/trip/ids", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public @ResponseBody TripResult getDurationById(@RequestParam final String originId, @RequestParam final String destinationId) {
-        return durationService.fetchDurationByIds(originId, destinationId);
+        TripResult result = durationService.fetchDurationByIds(originId, destinationId);
+        return result;
     }
 
 

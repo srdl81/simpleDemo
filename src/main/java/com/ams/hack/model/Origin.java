@@ -12,6 +12,9 @@ public class Origin {
         this.coordinates = coordinates;
     }
 
+    public Origin() {
+    }
+
     public String getName() {
         return name;
     }

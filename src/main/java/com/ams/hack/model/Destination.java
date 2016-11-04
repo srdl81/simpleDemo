@@ -12,6 +12,9 @@ public class Destination {
         this.coordinates = coordinates;
     }
 
+    public Destination() {
+    }
+
     public String getName() {
         return name;
     }
