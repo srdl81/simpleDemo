@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Component
 public class ModelConverter {
 
-    protected TripResult convertToModel(TripResultDTO dto) {
+    public TripResult convertToModel(TripResultDTO dto) {
         List<TripDTO> trips = dto.getTripDTOs();
 
         TripResult tripResult = new TripResult();
