@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class DurationService {
+public class TripService {
 
     @Autowired
     private ResRobotRepository repository;
@@ -17,13 +17,13 @@ public class DurationService {
     private ModelConverter modelConverter;
 
 
-    public TripResult fetchDurationByIds(String originId, String destinationId) {
+    public TripResult fetchTripByIds(String originId, String destinationId) {
         TripResultDTO dto = repository.receiveTravelTimeByIds(originId, destinationId);
 
         return modelConverter.convertToModel(dto);
     }
 
-    public TripResult fetchDurationByCoordinates(String originCoordLat, String originCoordLong, String destCoordLat, String destCoordLong) {
+    public TripResult fetchTripByCoordinates(String originCoordLat, String originCoordLong, String destCoordLat, String destCoordLong) {
         TripResultDTO dto = repository.receiveTravelTimeByCoordinates(originCoordLat, originCoordLong, destCoordLat, destCoordLong);
 
         return modelConverter.convertToModel(dto);

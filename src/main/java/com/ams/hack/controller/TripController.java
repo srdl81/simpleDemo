@@ -2,17 +2,17 @@ package com.ams.hack.controller;
 
 
 import com.ams.hack.model.TripResult;
-import com.ams.hack.service.DurationService;
+import com.ams.hack.service.TripService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Api(value = "Duration", description = "Calculate travel time")
+@Api(value = "Trip", description = "Calculate travel time")
 @RestController
-public class DurationController {
+public class TripController {
 
     @Autowired
-    private DurationService durationService;
+    private TripService tripService;
 
     @ApiOperation(value = "Receive duration by api-ids", nickname = "dasd", produces = "application/json",
     notes = "Älvsjö Station - Solna station " +
@@ -23,7 +23,7 @@ public class DurationController {
             @ApiResponse(code = 500, message = "Failure")})
     @RequestMapping(value = "/duration/trip/ids", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public @ResponseBody TripResult getDurationById(@RequestParam final String originId, @RequestParam final String destinationId) {
-        return durationService.fetchDurationByIds(originId, destinationId);
+        return tripService.fetchTripByIds(originId, destinationId);
     }
 
 
@@ -43,7 +43,7 @@ public class DurationController {
             @RequestParam final String originCoordLong,
             @RequestParam final String destCoordLat,
             @RequestParam final String destCoordLong) {
-        return durationService.fetchDurationByCoordinates(originCoordLat, originCoordLong, destCoordLat, destCoordLong);
+        return tripService.fetchTripByCoordinates(originCoordLat, originCoordLong, destCoordLat, destCoordLong);
     }
 
 }
