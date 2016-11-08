@@ -9,30 +9,53 @@ import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.stereotype.Component;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
 public class ModelConverter {
 
-    public TripResult convertToModel(TripResultDTO dto) {
-        List<TripDTO> trips = dto.getTripDTOs();
+    public TripResult convertToModel(TripResultDTO resultDTOs) {
+        return TripBuilder.aTrip()
+                .withOrigin(fetchOrigin(resultDTOs))
+                .withDestination(fetchDestination(resultDTOs))
+                .withDuration(fetchDuration(resultDTOs))
+                .build();
+    }
 
-        TripResult tripResult = new TripResult();
-        for (TripDTO tripDTO : trips) {
-            Trip trip = new Trip();
-            String duration = tripDTO.getDuration();
-            trip.setDuration(duration);
+    private Origin fetchOrigin(TripResultDTO resultDTO) {
+        List<LegDTO> legDTOs = resultDTO.getTripDTOs().stream().findFirst().get().getLegListDTO().getLegDTOs();
+        OriginDTO dto = getFirst(legDTOs).getOriginDTO();
 
-            for (LegDTO legDTO : tripDTO.getLegListDTO().getLegDTOs()) {
-                Leg leg = new Leg();
-                leg.setDestination(covertDestinatonDTO(legDTO.getDestinationDTO()));
-                leg.setOrigin(convertOriginDTO(legDTO.getOriginDTO()));
-                trip.getLegList().getLegs().add(leg);
-            }
-            tripResult.getTrips().add(trip);
-        }
+        return new Origin(dto.getId(), dto.getName(), new Coordinates(dto.getLatitude(), dto.getLongitude()));
+    }
 
-        return tripResult;
+    private Destination fetchDestination(TripResultDTO resultDTO) {
+        List<LegDTO> legDTOs = resultDTO.getTripDTOs().stream().findFirst().get().getLegListDTO().getLegDTOs();
+        DestinationDTO dto = getLast(legDTOs).getDestinationDTO();
+
+        return new Destination(dto.getId(), dto.getName(), new Coordinates(dto.getLatitude(), dto.getLongitude()));
+    }
+
+    private String fetchDuration(TripResultDTO resultDTOs) {
+        return resultDTOs.getTripDTOs().stream()
+                .map(dto -> dto.getDuration())
+                .sorted()
+                .findFirst()
+                .get();
+    }
+
+    private LegDTO getFirst(List<LegDTO> legs) {
+        return legs.stream()
+                .findFirst()
+                .get();
+    }
+
+    private LegDTO getLast(List<LegDTO> legs) {
+        return legs.stream()
+                .filter(Objects::nonNull)
+                .reduce((a, b) -> b)
+                .get();
     }
 
     public LocationResult convertToModel(LocationResultDTO resultDTO) {
@@ -54,14 +77,6 @@ public class ModelConverter {
                 .withName(locationDTO.getName())
                 .withCoordinates(new Coordinates(locationDTO.getLat(), locationDTO.getLon()))
                 .build();
-    }
-
-    private Origin convertOriginDTO(OriginDTO dto) {
-        return new Origin(dto.getId(), dto.getName(), new Coordinates(dto.getLatitude(), dto.getLongitude()));
-    }
-
-    private Destination covertDestinatonDTO(DestinationDTO dto) {
-        return new Destination(dto.getId(), dto.getName(), new Coordinates(dto.getLatitude(), dto.getLongitude()));
     }
 
     private String prettyPrint(String duration) {

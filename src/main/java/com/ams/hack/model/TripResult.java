@@ -1,15 +1,21 @@
 package com.ams.hack.model;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TripResult {
 
-    private List<Trip> trips = new ArrayList<>();
+    private Trip trip;
 
-    public List<Trip> getTrips() {
-        return trips;
+    public TripResult(Trip trip) {
+        this.trip = trip;
     }
 
+    public TripResult() {}
+
+    public Trip getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trip trip) {
+        this.trip = trip;
+    }
 }

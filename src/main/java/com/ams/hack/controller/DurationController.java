@@ -23,8 +23,7 @@ public class DurationController {
             @ApiResponse(code = 500, message = "Failure")})
     @RequestMapping(value = "/duration/trip/ids", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     public @ResponseBody TripResult getDurationById(@RequestParam final String originId, @RequestParam final String destinationId) {
-        TripResult result = durationService.fetchDurationByIds(originId, destinationId);
-        return result;
+        return durationService.fetchDurationByIds(originId, destinationId);
     }
 
 
