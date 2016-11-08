@@ -8,6 +8,7 @@ import org.joda.time.format.ISOPeriodFormat;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -59,16 +60,11 @@ public class ModelConverter {
     }
 
     public LocationResult convertToModel(LocationResultDTO resultDTO) {
-
-        List<Location> locations = resultDTO.getLocationDTOs()
-                .stream()
-                .map(locationDTO -> createLocation(locationDTO))
-                .collect(Collectors.toList());
-
-        LocationResult model = new LocationResult();
-        model.getLocations().addAll(locations);
-
-        return model;
+        return new LocationResult(
+                resultDTO.getLocationDTOs().stream()
+                        .map(locationDTO -> createLocation(locationDTO))
+                        .collect(Collectors.toList())
+        );
     }
 
     private Location createLocation(LocationDTO locationDTO) {
