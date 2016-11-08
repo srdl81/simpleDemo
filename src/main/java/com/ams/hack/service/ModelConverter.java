@@ -24,6 +24,14 @@ public class ModelConverter {
                 .build();
     }
 
+    public LocationResult convertToModel(LocationResultDTO resultDTO) {
+        return new LocationResult(
+                resultDTO.getLocationDTOs().stream()
+                        .map(locationDTO -> createLocation(locationDTO))
+                        .collect(Collectors.toList())
+        );
+    }
+
     private Origin fetchOrigin(TripResultDTO resultDTO) {
         List<LegDTO> legDTOs = resultDTO.getTripDTOs().stream().findFirst().get().getLegListDTO().getLegDTOs();
         OriginDTO dto = getFirst(legDTOs).getOriginDTO();
@@ -57,14 +65,6 @@ public class ModelConverter {
                 .filter(Objects::nonNull)
                 .reduce((a, b) -> b)
                 .get();
-    }
-
-    public LocationResult convertToModel(LocationResultDTO resultDTO) {
-        return new LocationResult(
-                resultDTO.getLocationDTOs().stream()
-                        .map(locationDTO -> createLocation(locationDTO))
-                        .collect(Collectors.toList())
-        );
     }
 
     private Location createLocation(LocationDTO locationDTO) {
