@@ -25,6 +25,7 @@ public class TripTest {
     private static final String SOLNA_STATION = "Solna station";
     private static final Double SOLNA_LATITUDE = 59.365104;
     private static final Double SOLNA_LONGITUDE = 18.010041;
+    private static final String REGEX_DURATION = "P(?:(?:\\d+D|\\d+M(?:\\d+D)?|\\d+Y(?:\\d+M(?:\\d+D)?)?)(?:T(?:\\d+H(?:\\d+M(?:\\d+S)?)?|\\d+M(?:\\d+S)?|\\d+S))?|T(?:\\d+H(?:\\d+M(?:\\d+S)?)?|\\d+M(?:\\d+S)?|\\d+S)|\\d+W)";
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -40,7 +41,10 @@ public class TripTest {
 
         //Then:
         assertThat(result.getStatusCode() == HttpStatus.OK);
-        assertThat(trip.getDuration()).isNotNull();
+        assertThat(trip.getDuration())
+                .isNotEmpty()
+                .isNotNull()
+                .matches(REGEX_DURATION);
 
         assertThat(trip.getOrigin().getId()).isEqualTo(ALVSJO_ID);
         assertThat(trip.getOrigin().getName()).isEqualTo(ÄLVSJÖ_STATION);
@@ -68,7 +72,10 @@ public class TripTest {
 
         //Then
         assertThat(result.getStatusCode() == HttpStatus.OK);
-        assertThat(trip.getDuration()).isNotNull();
+        assertThat(trip.getDuration())
+                .isNotEmpty()
+                .isNotNull()
+                .matches(REGEX_DURATION);
 
         assertThat(trip.getOrigin().getId()).isNotNull(); //Could be empty
         assertThat(trip.getOrigin().getName()).isEqualTo("Syllgatan 2, Stockholm");
