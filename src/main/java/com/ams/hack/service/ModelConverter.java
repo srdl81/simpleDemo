@@ -3,6 +3,7 @@ package com.ams.hack.service;
 
 import com.ams.hack.dto.*;
 import com.ams.hack.model.*;
+import org.joda.time.Duration;
 import org.joda.time.Period;
 import org.joda.time.format.ISOPeriodFormat;
 import org.joda.time.format.PeriodFormatter;
@@ -75,7 +76,7 @@ public class ModelConverter {
                 .build();
     }
 
-    private String prettyPrint(String duration) {
+    public static String prettyPrint(String duration) {
         Period period = ISOPeriodFormat.standard().parsePeriod(duration);
 
         PeriodFormatter periodFormatter = new PeriodFormatterBuilder()
