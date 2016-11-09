@@ -76,7 +76,7 @@ public class ModelConverter {
                 .build();
     }
 
-    public static String prettyPrint(String duration) {
+    private String prettyPrint(String duration) {
         Period period = ISOPeriodFormat.standard().parsePeriod(duration);
 
         PeriodFormatter periodFormatter = new PeriodFormatterBuilder()
@@ -95,7 +95,7 @@ public class ModelConverter {
         return periodFormatter.print(period);
     }
 
-    private Duration getStandardDuration(String a) {
+    public Duration getStandardDuration(String a) {
         return ISOPeriodFormat.standard().parsePeriod(a).toStandardDuration();
     }
 

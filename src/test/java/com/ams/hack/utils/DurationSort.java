@@ -1,10 +1,7 @@
 package com.ams.hack.utils;
 
-
 import com.ams.hack.service.ModelConverter;
-import org.joda.time.Duration;
-import org.joda.time.format.ISOPeriodFormat;
-import org.junit.Assert;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
@@ -16,22 +13,15 @@ public class DurationSort {
     public void cafeShouldNeverServeCoffeeItDoesntHave() {
        //Given:
         List<String> durations = Arrays.asList("PT1H1M", "PT46M", "PT1H28M", "PT3H19M", "PT9M", "PT19M", "PT3H1M", "PT25M");
+        ModelConverter modelConverter = new ModelConverter();
 
         //When:
-        List<String> collect = durations.stream()
-                .sorted((a,b) -> getStandardDuration(a).compareTo(getStandardDuration(b)))
+        List<String> sorted = durations.stream()
+                .sorted((a,b) -> modelConverter.getStandardDuration(a).compareTo(modelConverter.getStandardDuration(b)))
                 .collect(Collectors.toList());
 
-//        collect.stream()
-//                .forEach(o -> System.out.println(ModelConverter.prettyPrint(o)));
-
-
-
        //Then:
-        Assert.assertFalse(false);
-    }
-
-    private Duration getStandardDuration(String a) {
-        return ISOPeriodFormat.standard().parsePeriod(a).toStandardDuration();
+        assertThat(sorted)
+                .containsSequence("PT9M", "PT19M", "PT25M", "PT46M", "PT1H1M", "PT1H28M", "PT3H1M", "PT3H19M");
     }
 }
