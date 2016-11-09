@@ -50,7 +50,7 @@ public class ModelConverter {
     private String fetchDuration(TripResultDTO resultDTOs) {
         return resultDTOs.getTripDTOs().stream()
                 .map(dto -> dto.getDuration())
-                .sorted()
+                .sorted((a,b) -> getStandardDuration(a).compareTo(getStandardDuration(b)))
                 .findFirst()
                 .get();
     }
@@ -93,6 +93,10 @@ public class ModelConverter {
                 .toFormatter();
 
         return periodFormatter.print(period);
+    }
+
+    private Duration getStandardDuration(String a) {
+        return ISOPeriodFormat.standard().parsePeriod(a).toStandardDuration();
     }
 
 }
