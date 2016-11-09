@@ -17,6 +17,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class LocationTest {
 
+    private static final String ALVSJO_ID = "740000789";
+    private static final String ALVSJÖ_STATION = "Älvsjö station (Stockholm kn)";
+    private static final Double ALVSJO_LATITUDE = 59.278736;
+    private static final Double ALVSJO_LONGITUDE = 18.011066;
+
+    private static final String HANDEN_ID = "740098490";
+    private static final String HANDEN = "HANDEN";
+    private static final double HANDEN_LATITUDE = 59.167566;
+    private static final double HANDEN_LONGITUDE = 18.13447;
+
     @Autowired
     private TestRestTemplate restTemplate;
 
@@ -32,10 +42,10 @@ public class LocationTest {
         //Then:
         assertThat(result.getStatusCode() == HttpStatus.OK);
 
-        assertThat(location.getId()).isNotNull();
-        assertThat(location.getName()).isNotEmpty();
-        assertThat(location.getCoordinates().getLatitude()).isPositive();
-        assertThat(location.getCoordinates().getLongitude()).isPositive();
+        assertThat(location.getId()).isEqualTo(HANDEN_ID);
+        assertThat(location.getName()).isEqualToIgnoringCase(HANDEN);
+        assertThat(location.getCoordinates().getLatitude()).isEqualTo(HANDEN_LATITUDE);
+        assertThat(location.getCoordinates().getLongitude()).isEqualTo(HANDEN_LONGITUDE);
     }
 
     @Test
@@ -50,9 +60,9 @@ public class LocationTest {
         //Then:
         assertThat(result.getStatusCode() == HttpStatus.OK);
 
-        assertThat(location.getId()).isNotNull();
-        assertThat(location.getName()).isNotEmpty();
-        assertThat(location.getCoordinates().getLatitude()).isPositive();
-        assertThat(location.getCoordinates().getLongitude()).isPositive();
+        assertThat(location.getId()).isEqualTo(ALVSJO_ID);
+        assertThat(location.getName()).isEqualTo(ALVSJÖ_STATION);
+        assertThat(location.getCoordinates().getLatitude()).isEqualTo(ALVSJO_LATITUDE);
+        assertThat(location.getCoordinates().getLongitude()).isEqualTo(ALVSJO_LONGITUDE);
     }
 }

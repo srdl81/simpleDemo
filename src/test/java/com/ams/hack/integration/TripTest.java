@@ -16,14 +16,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class TripTest {
 
-    private static final Double ALVSJO_LATITUDE = new Double(59.278736);
-    private static final Double ALVSJO_LONGITUDE = new Double(18.011066);
-    private static final Double SOLNA_LATITUDE = new Double(59.365104);
-    private static final Double SOLNA_LONGITUDE = new Double(18.010041);
     private static final String ALVSJO_ID = "740000789";
     private static final String ÄLVSJÖ_STATION = "Älvsjö station (Stockholm kn)";
+    private static final Double ALVSJO_LATITUDE = 59.278736;
+    private static final Double ALVSJO_LONGITUDE = 18.011066;
+
     private static final String SOLNA_ID = "740000759";
     private static final String SOLNA_STATION = "Solna station";
+    private static final Double SOLNA_LATITUDE = 59.365104;
+    private static final Double SOLNA_LONGITUDE = 18.010041;
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -69,12 +70,14 @@ public class TripTest {
         assertThat(result.getStatusCode() == HttpStatus.OK);
         assertThat(trip.getDuration()).isNotNull();
 
-        assertThat(trip.getOrigin().getName()).isNotNull();
-        assertThat(trip.getOrigin().getCoordinates().getLatitude()).isPositive();
-        assertThat(trip.getOrigin().getCoordinates().getLongitude()).isPositive();
+        assertThat(trip.getOrigin().getId()).isNotNull(); //Could be empty
+        assertThat(trip.getOrigin().getName()).isEqualTo("Syllgatan 2, Stockholm");
+        assertThat(trip.getOrigin().getCoordinates().getLatitude()).isEqualTo(59.279176);
+        assertThat(trip.getOrigin().getCoordinates().getLongitude()).isEqualTo(18.011084);
 
-        assertThat(trip.getDestination().getName()).isNotNull();
-        assertThat(trip.getDestination().getCoordinates().getLatitude()).isPositive();
-        assertThat(trip.getDestination().getCoordinates().getLongitude()).isPositive();
+        assertThat(trip.getOrigin().getId()).isNotNull(); //Could be empty
+        assertThat(trip.getDestination().getName()).isEqualTo("Rättarvägen 2, Solna");
+        assertThat(trip.getDestination().getCoordinates().getLatitude()).isEqualTo(59.364996);
+        assertThat(trip.getDestination().getCoordinates().getLongitude()).isEqualTo(18.010904);
     }
 }
