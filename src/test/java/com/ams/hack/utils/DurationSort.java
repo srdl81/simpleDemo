@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class DurationSort {
 
     @Test
-    public void cafeShouldNeverServeCoffeeItDoesntHave() {
+    public void sortDurations() {
        //Given:
         List<String> durations = Arrays.asList("PT1H1M", "PT46M", "PT1H28M", "PT3H19M", "PT9M", "PT19M", "PT3H1M", "PT25M");
         ModelConverter modelConverter = new ModelConverter();
